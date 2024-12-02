@@ -1,0 +1,69 @@
+1. Streamlit (streamlit)
+Purpose: Streamlit is an open-source app framework used for creating interactive web applications, especially for machine learning and data science projects. It allows you to build user-friendly UIs for models and tools quickly.
+Usage: In this project, Streamlit is used to create an interactive web interface where users can upload PDF files and ask questions about the content of the PDFs. Key Streamlit functions include:
+st.text_input(): Accepts user input in the form of text.
+st.file_uploader(): Allows users to upload PDF files.
+st.write(): Displays output, like the generated responses.
+st.sidebar: Creates a sidebar for file uploads.
+st.spinner(): Shows a spinner while the app processes inputs.
+st.button(): Renders a clickable button to submit inputs.
+
+2. PyPDF2 (PyPDF2.PdfReader)
+Purpose: PyPDF2 is a Python library for reading and manipulating PDF documents. It can extract text, split pages, and even combine PDF documents.
+Usage: Here, PdfReader is used to read the content of uploaded PDF files, extracting text from each page to allow further processing.
+PdfReader(): Opens and reads a PDF file.
+extract_text(): Extracts text from the PDF for use in the question-answering system.
+
+3. Langchain (langchain)
+Purpose: Langchain is a library designed to help developers build applications that use large language models (LLMs) effectively. It provides utilities to chain together various components like prompts, document loaders, models, and embeddings.
+Usage: Langchain is being used here for text chunking, vector search, question-answering (QA) chain, and managing prompts. Key components:
+RecursiveCharacterTextSplitter: Splits large text into smaller chunks for efficient embedding and searching.
+FAISS: A similarity search library that helps in indexing and searching through vectors.
+load_qa_chain(): Loads a predefined chain to facilitate question answering based on documents.
+
+4. Langchain Google GenAI (langchain_google_genai)
+Purpose: This package allows for seamless integration of Google's Generative AI models within the Langchain framework. It supports embeddings, vector search, and conversational AI using Google's Gemini models.
+Usage:
+GoogleGenerativeAIEmbeddings: Converts text chunks into vector embeddings using Google's Generative AI models.
+ChatGoogleGenerativeAI: This is used to interact with the Google Gemini models in a conversational manner, generating responses to user queries.
+
+5. Google Generative AI (google.generativeai)
+Purpose: This is the official Python client for accessing Google's Generative AI services (like the Gemini models), which are designed to generate high-quality text or embeddings.
+Usage:
+genai.configure(): Configures the API key for authenticating and accessing Google's Generative AI models.
+The GoogleGenerativeAIEmbeddings class uses these services to generate vector embeddings of text.
+
+6. Facebook AI Similarity Search (FAISS) (langchain.vectorstores.FAISS)
+Purpose: FAISS is a library developed by Facebook AI to efficiently search through large collections of dense vectors. It is widely used for similarity search tasks, especially in AI and machine learning models.
+Usage:
+FAISS.from_texts(): Converts text chunks into vectors and stores them in an index.
+FAISS.load_local(): Loads a pre-saved FAISS index (which contains text vectors) from disk for similarity search during user interactions.
+FAISS is used here to enable vector-based similarity search, allowing the application to match user questions to relevant chunks of the PDF content.
+
+7. Python Dotenv (dotenv)
+Purpose: python-dotenv is a library that loads environment variables from a .env file into your Python environment. This is useful for securely managing sensitive information like API keys.
+Usage:
+load_dotenv(): Reads the .env file and loads environment variables (like GOOGLE_API_KEY) into the script.
+The Google API key is accessed using os.getenv() for secure API calls to Google's Generative AI services.
+
+8. OS (os)
+Purpose: The os module in Python provides functions for interacting with the operating system, such as reading environment variables or working with file paths.
+Usage:
+os.getenv(): Used to fetch environment variables (e.g., API keys) from the environment, ensuring sensitive information is not hardcoded in the script.
+
+9. PromptTemplate (langchain.prompts.PromptTemplate)
+Purpose: PromptTemplate is a utility in Langchain to create customizable prompt templates for large language models. This allows for flexible and reusable prompts across different applications.
+Usage: In this project, PromptTemplate is used to structure the question-answering prompts to the LLM, ensuring that the model uses the provided context to generate accurate responses.
+
+
+
+Summary of Use Cases:
+Streamlit: To build the front-end interface of the app.
+PyPDF2: To read and extract text from uploaded PDF documents.
+Langchain: To split text into chunks, build a vector search mechanism, and facilitate question-answering based on the documents.
+Langchain Google GenAI: To utilize Google’s generative AI for embeddings and question-answering.
+Google Generative AI: To access the Gemini models for generating responses and vector embeddings.
+FAISS: To perform efficient similarity searches on the vector embeddings created from the PDF content.
+Dotenv: To securely manage and load sensitive API keys into the environment.
+OS: To access environment variables for API keys.
+PromptTemplate: To format the questions for the generative model, ensuring accurate and context-aware answers.
